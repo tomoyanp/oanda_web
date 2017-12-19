@@ -21,14 +21,14 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-@app.route('/request', methods=['POST'])
+@app.route('/request', methods=['GET'])
 def request():
 
     instruments = response.instruments
     start_time = response.start_time
     end_time = response.end_time
     sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\'" % (instruments, start_time, end_time)
-    response = mysql_connector.select_sql(sql)        
+    response = mysql_connector.select_sql(sql)
     return Response(json.dumps(return_json))
 
 if __name__ == "__main__":

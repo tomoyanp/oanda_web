@@ -2,8 +2,8 @@
 
 <head>
 
-<script src="chart.min.js"></script>
-<script src="jquery-3.2.1.min.js"></script>
+<script src="chart.min.js" type="text/javascript"></script>
+<script src="jquery-3.2.1.min.js" type="text/javascript"></script>
 
 </head>
 
@@ -11,12 +11,33 @@
 <body>
 <canvas id="price-chart" height="500" width="3000"></canvas>
 
-<form>
-<textarea name="starttime"></textarea>
-<textarea name="endtime"></textarea>
-<textarea name="instruments”></textarea>
-</form>
-<script>
+<textarea id="starttime"></textarea>
+<textarea id="endtime"></textarea>
+<textarea id="instruments"></textarea>
+<button id="show-graph">show</button>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#show-graph').click(function(e) {
+        val starttime = $('#starttime').val();
+        val endtime   = $('#endtime').val();
+
+
+        $.ajax({
+            url: '',
+            type: 'GET',
+            data: {
+                'starttime': starttime,
+                'endtime': endtime
+            }
+        })
+        .done(function(data){
+            console.log(data);
+        });
+    });
+});
+</script>
+
+<script type="text/javascript">
 var ctx = document.getElementById("price-chart").getContext('2d');
 var myChart = new Chart(ctx, {
     type: 'line',
@@ -40,11 +61,10 @@ var myChart = new Chart(ctx, {
             backgroundColor: '#2E2EFE',
             borderColor: '#2E2EFE',
             type: 'bubble'
-            }, 
+            },
         ]
     }
 });
 </script>
 
 </body>
-
