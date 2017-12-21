@@ -4,16 +4,73 @@
   <head>
     <script type="text/javascript" src="{{ url_for('static', filename='js/d3.min.js') }}"></script>
     <meta charset="utf-8">
+    <script src="{{ url_for('static', filename='js/chart.min.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='js/jquery-3.2.1.min.js') }}" type="text/javascript"></script>
     <title>FX Glaphic Tool</title>
   </head>
 
 
   <body>
-    Start Date <input id="start_date" type="textarea">
-    Start Time <input id="start_time" type="textarea">
-    End Time <input id="end_time" type="textarea">
 
-    <div id="chart"></div>
+    <canvas id="price-chart" height="500" width="3000"></canvas>
+    
+    <textarea id="starttime"></textarea>
+    <textarea id="endtime"></textarea>
+    <textarea id="instruments"></textarea>
+    <button id="show-graph">show</button>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#show-graph').click(function(e) {
+            var instruments   = $('#instruments').val();
+            var starttime = $('#starttime').val();
+            var endtime   = $('#endtime').val();
+    
+    
+            $.ajax({
+                url: 'show-graphic',
+                type: 'GET',
+                data: {
+                    'instruments': instruments,
+                    'starttime': starttime,
+                    'endtime': endtime
+                }
+            })
+            .done(function(data){
+                console.log(data);
+            });
+        });
+    });
+    </script>
+    
+    <script type="text/javascript">
+    var ctx = document.getElementById("price-chart").getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ["2017-12-18 00:00:00", "2017-12-18 00:00:01", "2017-12-18 00:00:01", "2017-12-18 00:00:01", "2017-12-18 00:00:01", "2017-12-18 00:00:01"   ],
+            datasets: [{
+                label: 'USD_JPY',
+                data: [12, 19, 3, 5, 3, 4, 10, 11, 23, 22, 10, 24],
+                fill: 'False',
+                strokeColor: 'rgba(54, 162, 235, 0.2)',
+                pointColor:'rgba(255, 206, 86, 0.2)'
+                }, {
+                label: 'Buy',
+                data: [,,1] ,
+                backgroundColor: '#64FE2E',
+                borderColor: '#64FE2E',
+                type: 'bubble'
+                }, {
+                label: 'Sell',
+                data: [,,,,3],
+                backgroundColor: '#2E2EFE',
+                borderColor: '#2E2EFE',
+                type: 'bubble'
+                },
+            ]
+        }
+    });
+    </script>
+    
   </body>
-
 </html>
