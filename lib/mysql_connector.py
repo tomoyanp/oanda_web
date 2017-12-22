@@ -1,6 +1,5 @@
 import MySQLdb
 from datetime import datetime, timedelta
-from price_table_wrapper import PriceTableWrapper
 
 class MysqlConnector:
 

@@ -35,8 +35,39 @@
                     'endtime': endtime
                 }
             })
-            .done(function(data){
-                console.log(data);
+            .done(function(jsonData){
+                console.log(jsonData);
+                jsonData = JSON.parse(jsonData);
+                console.log(jsonData.ask_price);
+                console.log(jsonData.insert_time);
+                var ctx = document.getElementById("price-chart").getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: jsonData.insert_time,
+                        datasets: [{
+                            label: 'USD_JPY',
+                            data: jsonData.ask_price,
+                            fill: 'False',
+                            strokeColor: 'rgba(54, 162, 235, 0.2)',
+                            pointColor:'rgba(255, 206, 86, 0.2)'
+                            }, {
+                            label: 'Buy',
+                            data: [,,1] ,
+                            backgroundColor: '#64FE2E',
+                            borderColor: '#64FE2E',
+                            type: 'bubble'
+                            }, {
+                            label: 'Sell',
+                            data: [,,,,3],
+                            backgroundColor: '#2E2EFE',
+                            borderColor: '#2E2EFE',
+                            type: 'bubble'
+                            },
+                        ]
+                    }
+                });
+
             });
         });
     });
