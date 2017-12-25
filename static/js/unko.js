@@ -1,13 +1,11 @@
 createsvg();
 
 function createsvg() {
-  d3.select("#chart").append("svg")
+  var svg = d3.select("#chart").append("svg")
     .attr({
       width: 640,
       height: 480,
     });
-
-  var svg = d3.select("#chart");
 
   var c1 = [
     "2017-10-23 12:00:00",

@@ -12,7 +12,7 @@
 
   <body>
 
-    <canvas id="price-chart" height="2000" width="500"></canvas>
+    <canvas id="price-chart" height="500" width="3000"></canvas>
     
     <textarea id="starttime"></textarea>
     <textarea id="endtime"></textarea>
@@ -49,7 +49,19 @@
                             fill: 'False',
                             strokeColor: 'rgba(54, 162, 235, 0.2)',
                             pointColor:'rgba(255, 206, 86, 0.2)'
-                            }
+                            }, {
+                            label: 'Buy',
+                            data: [,,,,,,] ,
+                            backgroundColor: '#64FE2E',
+                            borderColor: '#64FE2E',
+                            type: 'bubble'
+                            }, {
+                            label: 'Sell',
+                            data: [,,,,,,],
+                            backgroundColor: '#2E2EFE',
+                            borderColor: '#2E2EFE',
+                            type: 'bubble'
+                            },
                         ]
                     }
                 });

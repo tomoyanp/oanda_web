@@ -29,8 +29,9 @@ def showGraphic():
     start_time = request.args.get('starttime')
     end_time = request.args.get('endtime')
     instruments = request.args.get('instruments')
-    sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\'" % (instruments, start_time, end_time)
-    print sql
+#    sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\'" % (instruments, start_time, end_time)
+    sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\' and insert_time like \'%%0:00\'" % (instruments, start_time, end_time)
+    #print sql
     response = mysql_connector.select_sql(sql)
     ask_price_list = []
     bid_price_list = []
@@ -50,6 +51,5 @@ def showGraphic():
     return Response(json.dumps(response_json))
 
 if __name__ == "__main__":
-#    app.run(debug=True, host="160.xxx.xxx.xxx")
-    app.run(debug=True, host="172.126.97.125")
-#    app.run(debug=True)
+#    app.run(debug=True, host="172.126.97.125")
+    app.run(debug=True, host="160.16.197.5")
