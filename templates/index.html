@@ -42,7 +42,8 @@
             })
             .done(function(jsonData){
                 jsonData = JSON.parse(jsonData);
-                console.log("OK");
+                console.log("WEI");
+                console.log(jsonData.upper_sigmas);
                 var ctx = document.getElementById("price-chart").getContext('2d');
                 var myChart = new Chart(ctx, {
                     type: 'line',
@@ -69,6 +70,27 @@
                             radius: 0,
                             backgroundColor: '#64FE2E',
                             borderColor: '#64FE2E'
+                            }, {
+                            label: 'UPPER_SIGMA',
+                            data: jsonData.upper_sigmas,
+                            fill: 'False',
+                            radius: 0,
+                            backgroundColor: '#FF0040',
+                            borderColor: '#FF0040'
+                            }, {
+                            label: 'LOWER_SIGMA',
+                            data: jsonData.lower_sigmas,
+                            fill: 'False',
+                            radius: 0,
+                            backgroundColor: '#0101DF',
+                            borderColor: '#0101DF'
+                            }, {
+                            label: 'BASE_LINE',
+                            data: jsonData.base_lines,
+                            fill: 'False',
+                            radius: 0,
+                            backgroundColor: '#33FF00',
+                            borderColor: '#33FF00'
                             }
                         ]
                     }

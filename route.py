@@ -22,18 +22,20 @@ app = Flask(__name__)
 
 def getBollingerDataset(ask_price_list, bid_price_list):
     window_size = 28
-    candle_width = 600
+#    candle_width = 600
+    candle_width = 1
     sigma_valiable = 2
     data_set2 = getBollingerDataSet(ask_price_list, bid_price_list, window_size, sigma_valiable, candle_width)
+    print(data_set2)
     upper_sigmas = data_set2["upper_sigmas"]
     lower_sigmas = data_set2["lower_sigmas"]
     base_lines   = data_set2["base_lines"]
 
     for i in range(0, len(upper_sigmas)):
-    if math.isnan(upper_sigmas[i]):
-        upper_sigmas[i] = None
-        lower_sigmas[i] = None
-        base_lines[i]   = None
+        if math.isnan(upper_sigmas[i]):
+            upper_sigmas[i] = None
+            lower_sigmas[i] = None
+            base_lines[i]   = None
 
     return upper_sigmas, lower_sigmas, base_lines
 
@@ -48,13 +50,13 @@ def getTradeHistoryDataset(ask_price_list, bid_price_list, insert_time_list):
     for i in range(0, len(insert_time_list)):
         if insert_time_list[i] == trade_cmp_time:
             trade_list.append(ask_price_list[i])
-            print ask_price_list[i]
+#            print(ask_price_list[i])
         else:
             trade_list.append(None)
 
         if insert_time_list[i] == stl_cmp_time:
             stl_list.append(ask_price_list[i])
-            print ask_price_list[i]
+#            print(ask_price_list[i])
         else:
             stl_list.append(None)
 
@@ -75,7 +77,6 @@ def showGraphic():
     instruments = request.args.get('instruments')
 #    sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\'" % (instruments, start_time, end_time)
     sql = "select ask_price, bid_price, insert_time from %s_TABLE where insert_time > \'%s\' and insert_time < \'%s\' and insert_time like \'%%0:00\'" % (instruments, start_time, end_time)
-    #print sql
     response = mysql_connector.select_sql(sql)
     ask_price_list = []
     bid_price_list = []
@@ -97,7 +98,7 @@ def showGraphic():
                       "lower_sigmas": lower_sigmas,
                       "base_lines"  : base_lines}
 
-    print response_json
+#    print(response_json)
 
 #    return Response(json.dumps(return_json))
     return Response(json.dumps(response_json))
