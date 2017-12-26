@@ -9,10 +9,16 @@
     <title>FX Glaphic Tool</title>
   </head>
 
+  <style type="text/css">
+    div.class_test {
+      style="overflow-y: scroll;"
+    }
+  </style>
 
   <body>
 
-    <canvas id="price-chart" height="2000" width="500"></canvas>
+
+    <canvas id="price-chart" style="overflow: scroll;"></canvas>
     
     <textarea id="starttime"></textarea>
     <textarea id="endtime"></textarea>
@@ -44,11 +50,26 @@
                     data: {
                         labels: jsonData.insert_time,
                         datasets: [{
+                            label: 'Trade',
+                            data: jsonData.trade_list,
+                            backgroundColor: '#0000FF',
+                            borderColor: '#0000FF',
+                            radius: 10,
+                            type: 'bubble'
+                            }, {
+                            label: 'STL',
+                            data: jsonData.stl_list,
+                            backgroundColor: '#FF0000',
+                            borderColor: '#FF0000',
+                            radius: 10,
+                            type: 'bubble'
+                            }, {
                             label: 'USD_JPY',
                             data: jsonData.ask_price,
                             fill: 'False',
-                            strokeColor: 'rgba(54, 162, 235, 0.2)',
-                            pointColor:'rgba(255, 206, 86, 0.2)'
+                            radius: 0,
+                            backgroundColor: '#64FE2E',
+                            borderColor: '#64FE2E'
                             }
                         ]
                     }
@@ -68,6 +89,7 @@
                 label: 'USD_JPY',
                 data: [12, 19, 3, 5, 3, 4, 10, 11, 23, 22, 10, 24],
                 fill: 'False',
+                radius: 0,
                 strokeColor: 'rgba(54, 162, 235, 0.2)',
                 pointColor:'rgba(255, 206, 86, 0.2)'
                 }, {
