@@ -12,7 +12,7 @@
 
   <body>
 
-    <canvas id="price-chart" height="2000" width="500"></canvas>
+    <canvas id="price-chart" height="500" width="800"></canvas>
     
     <textarea id="starttime"></textarea>
     <textarea id="endtime"></textarea>
@@ -47,8 +47,9 @@
                             label: 'USD_JPY',
                             data: jsonData.ask_price,
                             fill: 'False',
-                            strokeColor: 'rgba(54, 162, 235, 0.2)',
-                            pointColor:'rgba(255, 206, 86, 0.2)'
+                            radius: 0,
+                            backgroundColor: '#64FE2E',
+                            borderColor: '#64FE2E'
                             }
                         ]
                     }
@@ -68,6 +69,7 @@
                 label: 'USD_JPY',
                 data: [12, 19, 3, 5, 3, 4, 10, 11, 23, 22, 10, 24],
                 fill: 'False',
+                radius: 0,
                 strokeColor: 'rgba(54, 162, 235, 0.2)',
                 pointColor:'rgba(255, 206, 86, 0.2)'
                 }, {
